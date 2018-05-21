@@ -1,4 +1,5 @@
 from functools import reduce
+from math import gcd
 
 
 def read_file(input_name):
@@ -90,7 +91,7 @@ def simplify(ar):
     """
     ar2 = []  # for storing result(faster than deleting)
     for y in ar:
-        d = reduce(GCD, y)  # searching for greatest common divisor
+        d = reduce(gcd, y)  # searching for greatest common divisor
         if d != 1 and d != 0:
             y = list(map(lambda t: t//d, y))  # dividing by GCD
         ar2.append(y)  # append to answer
@@ -110,11 +111,16 @@ def solv(input_arr):
 def control_main(input_name):  # for using as module
     return solv(read_file(input_name))
 
+def timetest():
+    solv(read_file(file))
 
 if __name__ == "__main__":  # if launched standalone
-    file = 'generated.txt'
-    import time
-    start_time = time.time()
+    file = 'input40x61(10x30).txt'
+    # import time
+    # start_time = time.time()
     print(solv(read_file(file)))
-    end_time = time.time()
-    print(end_time-start_time)
+    # end_time = time.time()
+    # print(end_time-start_time)
+    import timeit
+
+    print(timeit.timeit("timetest()", setup="from __main__ import timetest", number=1))
